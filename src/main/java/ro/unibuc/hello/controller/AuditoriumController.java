@@ -1,33 +1,30 @@
 package ro.unibuc.hello.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import ro.unibuc.hello.data.Auditorium;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import ro.unibuc.hello.dto.AuditoriumDTO;
-import ro.unibuc.hello.dto.Greeting;
+import ro.unibuc.hello.exception.EntityNotFoundException;
 import ro.unibuc.hello.service.AuditoriumService;
 
-import java.util.List;
-
 @Controller
+@RequestMapping("/auditorium")
 public class AuditoriumController {
 
     @Autowired
     private AuditoriumService auditoriumService;
 
-    @GetMapping("/auditoriums")
+    @GetMapping("/get-auditorium/{id}")
     @ResponseBody
-    public List<AuditoriumDTO> getAuditoriums() { return auditoriumService.getAuditoriums(); }
-//    public void dosmth() {
-//        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!");
-//    }
+    public AuditoriumDTO getAuditoriumById(@PathVariable String id) throws EntityNotFoundException {
+        return auditoriumService.getAuditoriumById(id);
+    }
 
-    @PostMapping("/newAuditoriums")
-    public AuditoriumDTO postAuditorium(@RequestBody Auditorium auditorium) {
-//        System.out.println(auditorium);
-
-        return auditoriumService.saveAuditorium(auditorium);
+    @GetMapping("/get-auditorium-by-name/{name}")
+    @ResponseBody
+    public AuditoriumDTO getAuditoriumByName(@PathVariable String name) throws EntityNotFoundException {
+        return auditoriumService.getAuditoriumByName(name);
     }
 }
