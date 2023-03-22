@@ -9,8 +9,10 @@ public class Auditorium {
     @Id
     private String id;
     private String name;
-//    private String cinemaId;
     private int seatNumber;
+
+    @DBRef(lazy = true)
+    Cinema cinema;
 
     //    constructors
     public Auditorium() {}
@@ -45,6 +47,14 @@ public class Auditorium {
         this.seatNumber = seatNumber;
     }
 
+    public Cinema getCinema(){
+        return cinema;
+    }
+
+    public void setCinema(Cinema cinema){
+        this.cinema = cinema;
+    }
+
     //    toString
     @Override
     public String toString() {
@@ -52,6 +62,7 @@ public class Auditorium {
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", seatNumber=" + seatNumber +
+                ", cinema=" + cinema +
                 '}';
     }
 }

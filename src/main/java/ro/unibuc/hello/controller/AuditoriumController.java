@@ -9,6 +9,8 @@ import ro.unibuc.hello.dto.AuditoriumDTO;
 import ro.unibuc.hello.exception.EntityNotFoundException;
 import ro.unibuc.hello.service.AuditoriumService;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/auditorium")
 public class AuditoriumController {
@@ -26,5 +28,11 @@ public class AuditoriumController {
     @ResponseBody
     public AuditoriumDTO getAuditoriumByName(@PathVariable String name) throws EntityNotFoundException {
         return auditoriumService.getAuditoriumByName(name);
+    }
+
+    @GetMapping("/get-cinema-auditoriums/{cinema_id}")
+    @ResponseBody
+    public List <AuditoriumDTO> getCinemaAuditoriums(@PathVariable String cinemaId) throws EntityNotFoundException{
+        return auditoriumService.getCinemaAuditoriums(cinemaId);
     }
 }
