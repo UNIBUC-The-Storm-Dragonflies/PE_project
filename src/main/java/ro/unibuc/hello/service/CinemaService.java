@@ -1,18 +1,24 @@
 package ro.unibuc.hello.service;
 
-import ro.unibuc.hello.data.*;
+import ro.unibuc.hello.data.CinemaRepository;
 import ro.unibuc.hello.dto.CinemaDTO;
+import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.stereotype.Component;
 import ro.unibuc.hello.exception.EntityNotFoundException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+
+import ro.unibuc.hello.data.Cinema;
 
 import java.util.Optional;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
+import javax.management.Query;
 
 
 @Component 
@@ -33,15 +39,25 @@ public class CinemaService{
         .collect(Collectors.toList());
     }
 
-    public CinemaDTO getCinemaById(String id) throws EntityNotFoundException{
-        Optional<Cinema> cinema = cinemaRepository.findById(id);
+    // public ResponseEntity<CinemaDTO> getCinemaById(String id) throws EntityNotFoundException{
+    //     CinemaDTO cinema = cinemaRepository.findById(id).orElse(null);
 
-        if (cinema.isEmpty()){
+    //     if (cinema == null){
+    //         throw new EntityNotFoundException("cinema");
+    //     }
+
+    //     return new ResponseEntity.ok().body(cinema);
+    // }
+
+
+    public CinemaDTO getCinemaById(String id) throws EntityNotFoundException {
+        Optional<Cinema> cinema = cinemaRepository.findById(id);
+        if (cinema.isEmpty()) {
             throw new EntityNotFoundException("cinema");
         }
-
         return new CinemaDTO(cinema.get());
     }
+
 
     public CinemaDTO updateCinema (CinemaDTO cinemaUpdateDTO)throws EntityNotFoundException{
         Optional<Cinema> oldCinema = cinemaRepository.findById(cinemaUpdateDTO.getId());
@@ -61,5 +77,27 @@ public class CinemaService{
         return new CinemaDTO(newCinema);
     }
 
+    public ResponseEntity <Cinema> getCinemaByName(String name)throws EntityNotFoundException{
+        Cinema cinema = cinemaRepository.findByName(name).orElse(null);
+        
+        if (cinema == null){
+            throw new EntityNotFoundException("cinema");
 
+        }
+
+        return ResponseEntity.ok().body(cinema);
+
+    }
+
+    public ResponseEntity <Cinema> getCinemaByCity(String city)throws EntityNotFoundException{
+        Cinema cinema = cinemaRepository.findByCity(city).orElse(null);
+        
+        if (cinema == null){
+            throw new EntityNotFoundException("cinema");
+
+        }
+
+        return ResponseEntity.ok().body(cinema);
+
+    }
 }
