@@ -39,17 +39,6 @@ public class CinemaService{
         .collect(Collectors.toList());
     }
 
-    // public ResponseEntity<CinemaDTO> getCinemaById(String id) throws EntityNotFoundException{
-    //     CinemaDTO cinema = cinemaRepository.findById(id).orElse(null);
-
-    //     if (cinema == null){
-    //         throw new EntityNotFoundException("cinema");
-    //     }
-
-    //     return new ResponseEntity.ok().body(cinema);
-    // }
-
-
     public CinemaDTO getCinemaById(String id) throws EntityNotFoundException {
         Optional<Cinema> cinema = cinemaRepository.findById(id);
         if (cinema.isEmpty()) {

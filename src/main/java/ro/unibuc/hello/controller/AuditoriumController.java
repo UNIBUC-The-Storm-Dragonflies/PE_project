@@ -1,5 +1,7 @@
 package ro.unibuc.hello.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -26,5 +28,11 @@ public class AuditoriumController {
     @ResponseBody
     public AuditoriumDTO getAuditoriumByName(@PathVariable String name) throws EntityNotFoundException {
         return auditoriumService.getAuditoriumByName(name);
+    }
+
+    @GetMapping("/auditoriums-for-movie/{movieId}")
+    @ResponseBody
+    public List<AuditoriumDTO> getAuditoriumsByMovie(@PathVariable String movieId) throws EntityNotFoundException {
+        return auditoriumService.getAuditoriumsByMovie(movieId);
     }
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.ReadOnlyProperty;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("Auditoriums")
@@ -13,6 +12,9 @@ public class Auditorium {
     private String id;
     private String name;
     private int seatNumber;
+
+    @ReadOnlyProperty
+    private List<String> moviesIds;
 
     //    constructors
     public Auditorium() {}
@@ -45,6 +47,10 @@ public class Auditorium {
 
     public void setSeatNumber(int seatNumber) {
         this.seatNumber = seatNumber;
+    }
+
+    public List<String> getMovieIds() {
+        return moviesIds;
     }
 
     //    toString
