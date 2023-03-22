@@ -1,6 +1,9 @@
 package ro.unibuc.hello.data;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,7 +12,6 @@ public class Auditorium {
     @Id
     private String id;
     private String name;
-//    private String cinemaId;
     private int seatNumber;
 
     //    constructors
