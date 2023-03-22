@@ -5,7 +5,6 @@ import ro.unibuc.hello.data.Auditorium;
 public class AuditoriumDTO {
     private String id;
     private String name;
-    private String cinemaId;
 
     private int seatNumber;
 
@@ -45,13 +44,5 @@ public class AuditoriumDTO {
 
     public void setSeatNumber(int seatNumber) {
         this.seatNumber = seatNumber;
-    }
-
-    public String getCinemaId() {
-        return cinemaId;
-    }
-
-    public void setCinemaId(String cinemaId) {
-        this.cinemaId = cinemaId;
     }
 }
