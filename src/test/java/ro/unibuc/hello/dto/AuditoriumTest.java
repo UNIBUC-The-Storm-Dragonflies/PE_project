@@ -3,9 +3,14 @@ package ro.unibuc.hello.dto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import ro.unibuc.hello.data.Auditorium;
+
 class AuditoriumTest {
 
     AuditoriumDTO auditoriumDTO = new AuditoriumDTO("1", "Room 1", 101);
+
+    Auditorium auditorium = new Auditorium("Room 3", 300);
+    AuditoriumDTO newAuditoriumDTO = new AuditoriumDTO(auditorium);
 
     // unit tests for getters
     @Test
