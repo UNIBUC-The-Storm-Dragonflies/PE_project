@@ -1,6 +1,8 @@
 package ro.unibuc.hello.data;
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("movie")
@@ -11,6 +13,9 @@ public class MovieEntity {
     private String year;
     private String description;
     private String type;
+
+    @ReadOnlyProperty
+    private List<String> auditoriumIds;
 
     public MovieEntity() {
     }
@@ -53,6 +58,10 @@ public class MovieEntity {
     }
     public String getType() {
         return type;
+    }
+
+    public List<String> getAuditoriumIds() {
+        return auditoriumIds;
     }
 
 

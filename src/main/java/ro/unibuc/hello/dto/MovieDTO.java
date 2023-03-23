@@ -1,4 +1,5 @@
 package ro.unibuc.hello.dto;
+
 public class MovieDTO {
     private long id;
     private String title;
@@ -55,4 +56,5 @@ public class MovieDTO {
     public String getType() {
         return type;
     }
+    
 }

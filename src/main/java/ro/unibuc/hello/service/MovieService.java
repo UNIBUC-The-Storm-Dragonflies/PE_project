@@ -15,6 +15,7 @@ import ro.unibuc.hello.exception.EntityNotFoundException;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Component
 public class MovieService {
@@ -35,6 +36,15 @@ public class MovieService {
             throw new EntityNotFoundException(id);
         }
         return ResponseEntity.ok().body(entity);
+    }
+
+    public MovieEntity getMovieObjectById(String id) {
+        MovieEntity entity = movieRepository.findById(id).orElse(null);
+
+        if (entity == null) {
+            throw new EntityNotFoundException(id);
+        }
+        return entity;
     }
 
     public ResponseEntity<MovieDTO> saveMovie(MovieEntity movie) {
