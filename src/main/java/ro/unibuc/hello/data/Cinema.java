@@ -2,6 +2,9 @@ package ro.unibuc.hello.data;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
+import java.util.List;
 
 @Document("cinema")
 public class Cinema {
@@ -13,6 +16,10 @@ public class Cinema {
     private String street;
     private int number;
     private String city;
+
+    @DBRef(lazy = true)
+    private List<Auditorium> auditoriums;
+
 
 
     public Cinema() {
@@ -83,6 +90,14 @@ public class Cinema {
 
     public void setCity(String city){
         this.city = city;
+    }
+
+    public List<Auditorium> getAuditoriums(){
+        return auditoriums;
+    }
+
+    public void setAuditoriums(List<Auditorium> auditoriums){
+        this.auditoriums = auditoriums;
     }
 
     @Override

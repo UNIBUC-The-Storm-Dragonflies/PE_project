@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import ro.unibuc.hello.dto.AuditoriumCreationDTO;
 import ro.unibuc.hello.dto.AuditoriumDTO;
 import ro.unibuc.hello.exception.EntityNotFoundException;
 import ro.unibuc.hello.service.AuditoriumService;
@@ -17,6 +19,12 @@ public class AuditoriumController {
 
     @Autowired
     private AuditoriumService auditoriumService;
+
+    @PostMapping("/add-auditorium")
+    @ResponseBody
+    public AuditoriumDTO addAuditorium(@RequestBody AuditoriumCreationDTO auditoriumCreationDTO) throws EntityNotFoundException{
+        return auditoriumService.addAuditorium(auditoriumCreationDTO);
+    }
 
     @GetMapping("/get-auditorium/{id}")
     @ResponseBody
@@ -35,4 +43,11 @@ public class AuditoriumController {
     public List<AuditoriumDTO> getAuditoriumsByMovie(@PathVariable String movieId) throws EntityNotFoundException {
         return auditoriumService.getAuditoriumsByMovie(movieId);
     }
+
+    @GetMapping("/get-cinema-auditoriums/{cinema_id}")
+    @ResponseBody
+    public List <AuditoriumDTO> getCinemaAuditoriums(@PathVariable String cinema_id) throws EntityNotFoundException{
+        return auditoriumService.getCinemaAuditoriums(cinema_id);
+    }
+
 }
