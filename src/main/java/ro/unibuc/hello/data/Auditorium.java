@@ -3,6 +3,7 @@ package ro.unibuc.hello.data;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,6 +16,10 @@ public class Auditorium {
 
     @ReadOnlyProperty
     private List<String> moviesIds;
+
+    @DBRef(lazy = true)
+    Cinema cinema;
+
 
     //    constructors
     public Auditorium() {}
@@ -51,6 +56,15 @@ public class Auditorium {
 
     public List<String> getMovieIds() {
         return moviesIds;
+    }
+
+    public Cinema getCinema(){
+        return cinema;
+    }
+
+    public void setCinema(Cinema cinema){
+        this.cinema = cinema;
+        
     }
 
     //    toString
