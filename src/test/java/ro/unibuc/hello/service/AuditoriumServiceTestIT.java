@@ -46,7 +46,6 @@ class AuditoriumServiceTestIT {
 //        when(mockAuditoriumRepository.findById(id))
 //                .thenReturn(Optional.of(auditorium));
 
-//        System.out.println("yey");
         AuditoriumDTO auditoriumDTO = auditoriumService.getAuditoriumById(id);
 
         Assertions.assertEquals("room1", auditoriumDTO.getName());
