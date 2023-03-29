@@ -3,9 +3,9 @@ package ro.unibuc.hello.dto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 public class ClientTest {
-    ClientDTO myClient = new ClientDTO(1,"Nume Client", "email1@gmail.com");
+    ClientDTO myClient = new ClientDTO("1","Nume Client", "email1@gmail.com");
     @Test
-    void test_get_id() { Assertions.assertEquals(1, myClient.getId());}
+    void test_get_id() { Assertions.assertEquals("1", myClient.getId());}
     @Test
     void test_name(){
         Assertions.assertSame("Nume Client", myClient.getName());
@@ -18,8 +18,8 @@ public class ClientTest {
     @Test
     void test_set_id() {
         ClientDTO newClient = new ClientDTO();
-        newClient.setId(2);
-        Assertions.assertEquals(2, newClient.getId());
+        newClient.setId("2");
+        Assertions.assertEquals("2", newClient.getId());
     }
     @Test
     void test_set_name(){
