@@ -19,30 +19,28 @@ public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
 
-    private final AtomicLong counter = new AtomicLong();
-
     public List<ClientDTO> getAll() {
         return clientRepository.findAll()
                 .stream()
-                .map(client -> new ClientDTO(counter.incrementAndGet(), client.getName(), client.getEmail()))
+                .map(client -> new ClientDTO(client.getId(), client.getName(), client.getEmail()))
                 .collect(Collectors.toList());
     }
 
-    public ResponseEntity<ClientEntity> getClientById(String id) {
+    public ClientEntity getClientById(String id) {
         ClientEntity entity = clientRepository.findById(id).orElse(null);
         if (entity == null) {
             throw new EntityNotFoundException(id);
         }
-        return ResponseEntity.ok().body(entity);
-    }
+        return entity; 
+   }
 
-    public ResponseEntity<ClientDTO> saveClient(ClientEntity client) {
+    public ClientDTO saveClient(ClientEntity client) {
         ClientEntity clientEntity = clientRepository.save(client);
-        ClientDTO clientDTO = new ClientDTO(counter.incrementAndGet(), clientEntity.getName(), clientEntity.getEmail());
-        return new ResponseEntity<>(clientDTO, HttpStatus.CREATED);
+        ClientDTO clientDTO = new ClientDTO(clientEntity.getId(), clientEntity.getName(), clientEntity.getEmail());
+        return clientDTO;
     }
 
-    public ResponseEntity<ClientEntity> updateClientById(String id, ClientEntity updatedClient) {
+    public ClientEntity updateClientById(String id, ClientEntity updatedClient) {
         ClientEntity client = clientRepository.findById(id).orElse(null);
         if (client == null) {
             throw new EntityNotFoundException(id);
@@ -51,15 +49,15 @@ public class ClientService {
         client.setEmail(updatedClient.getEmail());
         client.setName(updatedClient.getName());
         ClientEntity clientEntity = clientRepository.save(client);
-        return ResponseEntity.ok(clientEntity);
+        return clientEntity;
     }
 
-    public ResponseEntity<String> deleteClientById(String id) {
+    public String deleteClientById(String id) {
         ClientEntity client = clientRepository.findById(id).orElse(null);
         if (client == null) {
             throw new EntityNotFoundException(id);
         }
         clientRepository.delete(client);
-        return new ResponseEntity<>(id, HttpStatus.OK);
+        return id;
     }
 }
