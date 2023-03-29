@@ -24,6 +24,15 @@ public class CinemaDTO {
         this.city = city;
     }
 
+    public CinemaDTO(String name, String email, String street, int number, String city) {
+        this.name = name;
+        this.email = email;
+        this.street = street;
+        this.number = number;
+        this.city = city;
+    }
+
+
    public CinemaDTO(Cinema cinema){
     this.id = cinema.getId();
     this.name = cinema.getName();
@@ -64,6 +73,22 @@ public int getNumber(){
 
 public String getCity(){
     return city;
+}
+
+public void setEmail(String email){
+    this.email = email;
+}
+
+public void setCity(String city){
+    this.city = city;
+}
+
+public void setNumber(int number){
+    this.number = number;
+}
+
+public void setStreet(String street){
+    this.street = street;
 }
 
 public Cinema toCinema(Boolean hasId){
