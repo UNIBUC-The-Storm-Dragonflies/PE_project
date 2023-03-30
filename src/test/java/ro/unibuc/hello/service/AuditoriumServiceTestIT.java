@@ -14,6 +14,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ro.unibuc.hello.data.Auditorium;
 
+import static org.mockito.ArgumentMatchers.isNull;
 import static org.mockito.Mockito.when;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -22,29 +23,17 @@ import java.util.Optional;
 
 
 @SpringBootTest
-//@Tag("IT")
-@ExtendWith(SpringExtension.class)
+@Tag("IT")
 class AuditoriumServiceTestIT {
 
-//    @MockBean
-//    AuditoriumRepository mockAuditoriumRepository;
-
-//    @InjectMocks
-//    AuditoriumService auditoriumService = new AuditoriumService();
-
     @Autowired
-    AuditoriumRepository mockAuditoriumRepository;
+    AuditoriumRepository auditoriumRepository;
     @Autowired
     AuditoriumService auditoriumService;
 
     @Test
     void test_getAuditoriumById_returnEntity() {
         String id = "1234567890";
-
-//        Auditorium auditorium = new Auditorium("room1", 101);
-//        auditorium.setId(id);
-//        when(mockAuditoriumRepository.findById(id))
-//                .thenReturn(Optional.of(auditorium));
 
         AuditoriumDTO auditoriumDTO = auditoriumService.getAuditoriumById(id);
 
@@ -56,12 +45,7 @@ class AuditoriumServiceTestIT {
     void test_getAuditoriumById_throwEntityNotFoundException() {
         String id = "exception";
 
-        try {
-            AuditoriumDTO auditoriumDTO = auditoriumService.getAuditoriumById(id);
-        } catch (Exception ex) {
-            Assertions.assertEquals(ex.getClass(), EntityNotFoundException.class);
-            Assertions.assertEquals(ex.getMessage(), "Entity: auditorium was not found");
-        }
+        Assertions.assertThrows(EntityNotFoundException.class, () -> auditoriumService.getAuditoriumById(id));
     }
 
     @Test
@@ -78,12 +62,7 @@ class AuditoriumServiceTestIT {
     void test_getAuditoriumByName_throwEntityNotFoundException() {
         String name = "exception";
 
-        try {
-            AuditoriumDTO auditoriumDTO = auditoriumService.getAuditoriumByName(name);
-        } catch (Exception ex) {
-            Assertions.assertEquals(ex.getClass(), EntityNotFoundException.class);
-            Assertions.assertEquals(ex.getMessage(), "Entity: auditorium was not found");
-        }
+        Assertions.assertThrows(EntityNotFoundException.class, () -> auditoriumService.getAuditoriumByName(name));
     }
 
     @Test
@@ -99,14 +78,9 @@ class AuditoriumServiceTestIT {
 
     @Test
     void test_getAuditoriumsByMovie_throwEntityNotFoundException() {
-        String movieId = "123";
+        String movieId = "exception";
 
-        try {
-            List<AuditoriumDTO> auditoriumDTOList = auditoriumService.getAuditoriumsByMovie(movieId);
-        } catch (Exception ex) {
-            Assertions.assertEquals(ex.getClass(), EntityNotFoundException.class);
-            Assertions.assertEquals(ex.getMessage(), "Entity: movie was not found");
-        }
+        Assertions.assertThrows(EntityNotFoundException.class, () -> auditoriumService.getAuditoriumsByMovie(movieId));
     }
 
 }
