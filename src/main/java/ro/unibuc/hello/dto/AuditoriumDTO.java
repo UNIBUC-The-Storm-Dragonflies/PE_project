@@ -2,10 +2,11 @@ package ro.unibuc.hello.dto;
 
 import ro.unibuc.hello.data.Auditorium;
 
+import java.util.Objects;
+
 public class AuditoriumDTO {
     private String id;
     private String name;
-
     private int seatNumber;
 
     public AuditoriumDTO() {}
@@ -44,5 +45,18 @@ public class AuditoriumDTO {
 
     public void setSeatNumber(int seatNumber) {
         this.seatNumber = seatNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AuditoriumDTO that = (AuditoriumDTO) o;
+        return seatNumber == that.seatNumber && id.equals(that.id) && Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, seatNumber);
     }
 }

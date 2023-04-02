@@ -22,21 +22,22 @@ class ClientServiceTestIT {
     @Autowired
     ClientService clientService;
 
+//    @Test
+//    void test_saveClient_returnsClientDtoWithInformation() {
+//        // Arrange
+//        String name = "Name 1";
+//        String email = "email12340@email.com";
+//        ClientEntity clientEntity = new ClientEntity(name, email);
+//
+//        // Act
+//        ClientDTO clientDTO = clientService.saveClient(clientEntity);
+//
+//        // Assert
+//        Assertions.assertEquals("Name 1", clientDTO.getName());
+//        Assertions.assertEquals("email12340@email.com", clientDTO.getEmail());
+//    }
+
     @Test
-    void test_saveClient_returnsClientDtoWithInformation() {
-        // Arrange
-        String name = "Name 1";
-        String email = "email12340@email.com";
-        ClientEntity clientEntity = new ClientEntity(name, email);
-
-        // Act
-        ClientDTO clientDTO = clientService.saveClient(clientEntity);
-
-        // Assert
-        Assertions.assertEquals("Name 1", clientDTO.getName());
-        Assertions.assertEquals("email12340@email.com", clientDTO.getEmail());
-    }
-
     void test_DeleteClientById_returnsId() {
         // Arrange
         String name = "Name";

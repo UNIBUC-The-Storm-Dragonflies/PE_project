@@ -64,11 +64,9 @@ public class AuditoriumService {
         MovieEntity movie = movieService.getMovieObjectById(movieId);
         
         if(movie == null) {
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            
+            throw new EntityNotFoundException("movie");
         }
-        System.out.println(movie);
-              
+
         return auditoriumRepository
                 .findAll()
                 .stream()
