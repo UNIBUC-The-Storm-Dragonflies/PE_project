@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_PASSWORD = credentials("docker1029")
+        DOCKER_HUB_CREDS = credentials("docker_hub_creds")
     }
 
     stages {
