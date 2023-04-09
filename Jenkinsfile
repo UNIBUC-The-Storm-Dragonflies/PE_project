@@ -25,5 +25,11 @@ pipeline {
             sh "git push https://$GITHUB_TOKEN@github.com/al1g/service.git ${env.IMAGE_TAG}"
           }
         }
+        stage('Docker start') {
+            steps {
+                sh "IMAGE_TAG=${env.IMAGE_TAG} docker-compose up -d hello"
+            }
+            
+        }
     }
 }
