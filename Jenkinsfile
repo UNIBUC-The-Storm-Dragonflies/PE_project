@@ -22,7 +22,7 @@ pipeline {
             }
             sh "docker build -t ovidiuiordache/hello-img:${MAJOR_VERSION}.\$((${MINOR_VERSION} + 1)).${PATCH_VERSION} ."
             sh "git tag ${env.IMAGE_TAG}"
-            sh "git push https://$GITHUB_TOKEN@github.com/OvidiuIordache1/service.git ${env.IMAGE_TAG}"
+            sh "git push https://$GITHUB_TOKEN@github.com/UNIBUC-The-Storm-Dragonflies/PE_project.git ${env.IMAGE_TAG}"
           }
         }
         stage('Docker start') {
