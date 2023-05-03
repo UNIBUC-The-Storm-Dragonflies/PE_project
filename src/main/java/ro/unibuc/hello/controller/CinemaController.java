@@ -13,6 +13,11 @@ import ro.unibuc.hello.exception.EntityNotFoundException;
 
 import java.util.List;
 
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
+import io.micrometer.core.instrument.MeterRegistry;
+import java.util.concurrent.atomic.AtomicLong;
+
 
 @Controller
 @RequestMapping("/cinema")
@@ -20,6 +25,9 @@ public class CinemaController {
 
     @Autowired
     private CinemaService cinemaService;
+
+    @Autowired
+    MeterRegistry metricsRegistry;
 
     @PostMapping("/add_cinema")
     @ResponseBody
@@ -29,11 +37,11 @@ public class CinemaController {
 
     @GetMapping("/cinemas")
     @ResponseBody
+    @Timed(value = "cinemas.get.time", description = "Time taken to get cinemas")
+    @Counted(value = "cinemas.get.time", description = "Times cinemas were returned")
     public List<CinemaDTO> getCinemas(){
         return cinemaService.getCinemas();
     } 
-
-
 
     @PutMapping("/update_cinema")
     @ResponseBody
