@@ -47,9 +47,6 @@ public class CinemaController {
         return cinemaService.getCinemaById(id);
     }
 
-  
-
-
     @GetMapping("/name/{name}")
     @ResponseBody
     public ResponseEntity<Cinema> getCinemaByName(@PathVariable(value = "name") String name) throws EntityNotFoundException{
