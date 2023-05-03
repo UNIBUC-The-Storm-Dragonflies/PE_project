@@ -1,6 +1,6 @@
 version: '3.1'
 services:
-  hello:
+  hello: # stateless spring application
     image: al1g/hello-img:${IMAGE_TAG}
     ports:
       - 8080:8080
