@@ -20,9 +20,11 @@ pipeline {
                 env.PATCH_VERSION = sh([script: 'git tag | sort --version-sort | tail -1 | cut -d . -f 3', returnStdout: true]).trim()
                 env.IMAGE_TAG = "${env.MAJOR_VERSION}.\$((${env.MINOR_VERSION} + 1)).${env.PATCH_VERSION}"
             }
-            sh "docker build -t al1g/hello-img:${MAJOR_VERSION}.\$((${MINOR_VERSION} + 1)).${PATCH_VERSION} ."
+            sh "docker build -t ovidiuiordache/hello-img:${env.IMAGE_TAG} ."
+            sh "docker login docker.io -u ovidiuiordache -p $DOCKER_PASSWORD"
+            sh "docker push ovidiuiordache/hello-img:${env.IMAGE_TAG}"
             sh "git tag ${env.IMAGE_TAG}"
-            sh "git push https://$GITHUB_TOKEN@github.com/al1g/service.git ${env.IMAGE_TAG}"
+            sh "git push https://$GITHUB_TOKEN@github.com/UNIBUC-The-Storm-Dragonflies/PE_project.git ${env.IMAGE_TAG}"
           }
         }
         stage('Docker start') {
